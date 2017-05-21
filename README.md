@@ -16,3 +16,6 @@ of information is known, yes is too long to type in by hand.
 
 ## Uninstall
     make uninstall
+
+## A word of warning
+Arguments supplied to this tool will be visible in the process list to all users and also via shell history.
