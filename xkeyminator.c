@@ -133,6 +133,8 @@ int main(int argc, char **argv)
             XSendEvent(event.display, event.window, True, KeyPressMask,
                        (XEvent*)&event);
 
+            string[i] = '\0';
+
             msleep(KEYPRESS_WAIT);
         }
     }
