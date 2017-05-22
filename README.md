@@ -7,6 +7,7 @@ of information is known, yes is too long to type in by hand.
 
 ## Usage
     sleep 3 && xkeyminator "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACA..."
+or
 
     sleep 3 && cat ~/.ssh/id_rsa.pub | xkeyminator
 
