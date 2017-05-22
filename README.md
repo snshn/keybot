@@ -6,7 +6,9 @@ similar situations where there's no access to clipboard buffer but the string
 of information is known, yes is too long to type in by hand.
 
 ## Usage
-    sleep 5 && xkeyminator "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACA..."
+    sleep 3 && xkeyminator "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACA..."
+
+    sleep 3 && cat ~/.ssh/id_rsa.pub | xkeyminator
 
 ## Build
     make clean all
