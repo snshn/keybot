@@ -18,10 +18,11 @@ void msleep(int milliseconds)
 }
 
 XKeyEvent createKeyEvent(Display *display, Window window, Window rootWin,
-                         char press, int keycode, unsigned int modifiers)
+                         int type, int keycode, unsigned int modifiers)
 {
     XKeyEvent event;
 
+    event.type        = type;
     event.display     = display;
     event.window      = window;
     event.root        = rootWin;
@@ -31,14 +32,9 @@ XKeyEvent createKeyEvent(Display *display, Window window, Window rootWin,
     event.y           = 1;
     event.x_root      = 1;
     event.y_root      = 1;
-    event.same_screen = True;
-    event.keycode     = XKeysymToKeycode(display, keycode);
     event.state       = modifiers;
-
-    if (press)
-        event.type = KeyPress;
-    else
-        event.type = KeyRelease;
+    event.keycode     = XKeysymToKeycode(display, keycode);
+    event.same_screen = True;
 
     return event;
 }
@@ -125,13 +121,17 @@ int main(int argc, char **argv)
                 modifiers = ShiftMask;
             }
 
-            XKeyEvent event = createKeyEvent(display, focWin, rootWin, 1, keycode, modifiers);
-            XSendEvent(event.display, event.window, True, KeyPressMask, (XEvent*)&event);
+            XKeyEvent event = createKeyEvent(display, focWin, rootWin, KeyPress,
+                                             keycode, modifiers);
+            XSendEvent(event.display, event.window, True, KeyPressMask,
+                       (XEvent*)&event);
 
             msleep(KEYPRESS_DELAY);
 
-            event = createKeyEvent(display, focWin, rootWin, 0, keycode, modifiers);
-            XSendEvent(event.display, event.window, True, KeyPressMask, (XEvent*)&event);
+            event = createKeyEvent(display, focWin, rootWin, KeyRelease,
+                                   keycode, modifiers);
+            XSendEvent(event.display, event.window, True, KeyPressMask,
+                       (XEvent*)&event);
 
             msleep(KEYPRESS_WAIT);
         }
