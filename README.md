@@ -1,5 +1,5 @@
-# xkeyminator
-An automated keyboard input tool for X11.
+# keybot
+Automated keyboard input tool.
 
 Comes in handy to securely input pubkeys into java-based web VNCs and in other
 similar situations where there's no access to clipboard buffer but the string
