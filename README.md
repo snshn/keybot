@@ -1,15 +1,16 @@
 # keybot
-Automated keyboard input tool.
 
-Comes in handy to securely input pubkeys into java-based web VNCs and in other
-similar situations where there's no access to clipboard buffer but the string
-of information is known, yes is too long to type in by hand.
+Automated text input utility
+ 
+Comes in handy:
+- when need to securely input keys, passwords, and other chunks of text into UI applications that don't support pasting from clipboard
+- for GUI automation
 
 ## Usage
-    sleep 3 && xkeyminator "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACA..."
+    sleep 5 && keybot "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACA..."
 or
 
-    sleep 3 && cat ~/.ssh/id_rsa.pub | xkeyminator
+    sleep 5 && cat ~/.ssh/id_rsa.pub | keybot
 
 ## Build
     make clean all
@@ -20,5 +21,8 @@ or
 ## Uninstall
     make uninstall
 
-## A word of warning
-Arguments supplied to this tool will be visible in the process list to all users and also via shell history.
+## License
+The Unlicense
+
+<!-- Microtext -->
+<sub>Arguments supplied to this tool will be visible in the process list to all users and also via shell history</sub>
