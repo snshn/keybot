@@ -1,28 +1,37 @@
-# Makefile for keybot - an automated keyboard input tool for X11
+# Makefile for keybot - an automated keyboard input tool for X11 and macOS
 # See LICENSE file for copyright and license details
 
+PROGNAME = keybot
+
 CFLAGS = -std=c99 -s -pedantic -Wall -Wextra -Wfatal-errors -pedantic-errors -O3 -D_XOPEN_SOURCE=500 -D_POSIX_C_SOURCE=200809L
-CC     = gcc $(CFLAGS)
+CC     = cc $(CFLAGS)
 
-LIBS = -lX11
-PROG = keybot
+UNAME_S := $(shell uname -s)
 
-all: $(PROG)
+ifeq ($(UNAME_S),Darwin)
+    LIBS = -framework ApplicationServices -framework Carbon -framework CoreFoundation
+else
+    LIBS = -lX11
+endif
 
-$(PROG):
-	    $(CC) -o $(PROG) $(PROG).c $(LIBS)
+all: $(PROGNAME)
+.PHONY: all
+
+$(PROGNAME):
+	$(CC) -o $(PROGNAME) src/$(PROGNAME).c $(LIBS)
 
 clean:
-	    rm -f $(PROG)
+	@rm -f $(PROGNAME)
+.PHONY: clean
 
 install: all
 	@echo installing executable file to ${DESTDIR}${PREFIX}/bin
 	@mkdir -p ${DESTDIR}${PREFIX}/bin
-	@cp -f $(PROG) ${DESTDIR}${PREFIX}/bin
-	@chmod 755 ${DESTDIR}${PREFIX}/bin/$(PROG)
+	@cp -f $(PROGNAME) ${DESTDIR}${PREFIX}/bin
+	@chmod 755 ${DESTDIR}${PREFIX}/bin/$(PROGNAME)
+.PHONY: install
 
 uninstall:
 	@echo removing executable file from ${DESTDIR}${PREFIX}/bin
-	@rm -f ${DESTDIR}${PREFIX}/bin/$(PROG)
-
-.PHONY: all clean install uninstall
+	@rm -f ${DESTDIR}${PREFIX}/bin/$(PROGNAME)
+.PHONY: uninstall
