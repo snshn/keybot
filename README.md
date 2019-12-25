@@ -1,10 +1,12 @@
 # keybot
 
+[![Travis CI Build Status](https://travis-ci.org/Y2Z/keybot.svg?branch=master)](https://travis-ci.org/Y2Z/keybot)
+
 Automated text input utility for macOS and GNU/Linux (X11)
 
 Comes in handy:
-- when need to securely input keys, passwords, and other chunks of text into UI applications
 - for GUI automation
+- when need to input keys, passwords, and other chunks of text into UI applications
 
 Currently does not have support for non-ASCII characters
 

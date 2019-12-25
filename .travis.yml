@@ -1,0 +1,45 @@
+language: c
+
+sudo: false
+
+matrix:
+  include:
+
+    - os: linux
+      compiler: gcc
+      addons:
+        apt:
+          packages:
+            - xorg-dev
+
+    - os: linux
+      compiler: clang
+      dist: xenial
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-xenial-8
+          packages:
+            - clang-8
+            - xorg-dev
+      env:
+        - MATRIX_EVAL="CC=clang-8"
+
+    - os: osx
+      compiler: gcc
+      osx_image: xcode10.1
+      env:
+        - MATRIX_EVAL="brew install gcc5 && CC=gcc-5"
+
+    - os: osx
+      compiler: clang
+      osx_image: xcode10.1
+
+before_install:
+  - eval "${MATRIX_EVAL}"
+
+script:
+  - make
+  - make install DESTDIR=.
+  - make uninstall DESTDIR=.
