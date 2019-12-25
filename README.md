@@ -2,7 +2,7 @@
 
 [![Travis CI Build Status](https://travis-ci.org/Y2Z/keybot.svg?branch=master)](https://travis-ci.org/Y2Z/keybot)
 
-Automated text input utility for macOS and GNU/Linux (X11)
+Automated text input utility for macOS and GNU/Linux
 
 Comes in handy:
 - for GUI automation
